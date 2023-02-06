@@ -2,11 +2,14 @@ import streamlit as st
 import shelve
 import time
 import os
-from lighthouseweb3 import Lighthouse
-#set api_key from env variable LH_TOKEN
-api_key = os.environ['LH_TOKEN']
+try:
+    from lighthouseweb3 import Lighthouse
+    #set api_key from env variable LH_TOKEN
+    api_key = os.environ['LH_TOKEN']
 
-lh = Lighthouse(token="os.environ'LH_TOKEN')")
+    lh = Lighthouse(token="os.environ'LH_TOKEN')")
+except:
+    pass
 def app():
     st.write("# Upload Your own Music!")
     if "address" in st.session_state:
