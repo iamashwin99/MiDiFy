@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 from apps import Listen, Discover, Upload, About
 from web3 import Web3
-
+from wallet_connect import wallet_connect
 
 st.set_page_config(page_title="MiDiFy - Listen. Discover. Create", page_icon="🎶", layout="wide", initial_sidebar_state="expanded")
 
@@ -52,7 +52,7 @@ with st.sidebar:
 
     col1, col2 = st.columns(2)
     with col1:
-        st.image("/home/karnada/Sandbox/Projects/MiDify/assets/midify.png", width=100)
+        st.image("assets/midify.png", width=100)
     with col2:
         st.write("# MiDiFy")
     # st.sidebar.title("MiDiFy")
@@ -63,9 +63,21 @@ with st.sidebar:
         menu_icon="cast",
         default_index=0,
     )
+    connect_button = wallet_connect(label="Connect to wallet", key="wallet")
+    if connect_button!='not':
+        st.experimental_set_query_params(address=connect_button)
+        st.session_state["address"] = connect_button
+        st.info(f"#### Connected to wallet \n {connect_button}")
     st.sidebar.info(
         """
         ## About
         MiDiFy is a  simple decentralised music streaming service built on top of the Lighthouse SDK.
     """
     )
+
+
+# select app    
+for app in apps:
+        if app["title"] == selected_page:
+            app["func"]()
+            break
