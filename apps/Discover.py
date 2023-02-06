@@ -10,3 +10,5 @@ def app():
                 st.write(f"### {shelvedb[key]['release_date']}")
                 st.image(shelvedb[key]['cover'])
                 st.audio(shelvedb[key]['music'])
+    else:
+        st.write("Please connect to a wallet to view your music!")
