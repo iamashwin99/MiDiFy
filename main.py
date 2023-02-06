@@ -4,7 +4,7 @@ from apps import Listen, Discover, Upload, About
 from web3 import Web3
 
 
-st.set_page_config(page_title="MiDiFy - Listen. Discover. Create", page_icon="🎼", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="MiDiFy - Listen. Discover. Create", page_icon="🎶", layout="wide", initial_sidebar_state="expanded")
 
 
 # # setup constants 
@@ -21,7 +21,7 @@ st.set_page_config(page_title="MiDiFy - Listen. Discover. Create", page_icon="�
 # w3 = Web3(Web3.HTTPProvider(infura_url))
 
 apps = [
-    {"func": Listen.app, "title": "Listen", "icon": "music"},
+    {"func": Listen.app, "title": "Listen", "icon": "ear"},
     {"func": Discover.app, "title": "Discover", "icon": "search"},
     {"func": Upload.app, "title": "Create", "icon": "upload"},
     {"func": About.app, "title": "About", "icon": "info-circle"},
@@ -50,9 +50,22 @@ params = st.experimental_get_query_params()
 # Fill in sidebar data
 with st.sidebar:
 
-    st.sidebar.title("About")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image("/home/karnada/Sandbox/Projects/MiDify/assets/midify.png", width=100)
+    with col2:
+        st.write("# MiDiFy")
+    # st.sidebar.title("MiDiFy")
+    selected_page = option_menu(
+        "Main Menu",
+        options=titles,
+        icons=icons,
+        menu_icon="cast",
+        default_index=0,
+    )
     st.sidebar.info(
         """
+        ## About
         MiDiFy is a  simple decentralised music streaming service built on top of the Lighthouse SDK.
     """
     )
